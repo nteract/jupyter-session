@@ -1,6 +1,6 @@
 {
   "name": "jupyter-session",
-  "main": "./src/main",
+  "main": "./lib/main",
   "version": "0.0.1",
   "description": "A tool for interacting with Jupyter Kernels",
   "author": "Will Whitney <me@willwhitney.com>",
@@ -9,13 +9,14 @@
     "prebuild": "mkdirp lib && mkdirp dist && npm run clean",
     "build": "npm run build:es5 && npm run build:browser",
     "build:es5": "coffee -c --map --output lib/ src",
-    "build:browser": "browserify lib/*.js --outfile dist/transformime.js",
+    "build:browser": "echo 'browserify lib/kernel.js --outfile dist/jupyter-session.js'",
     "prepublish": "npm run build",
     "clean": "rimraf lib/* dist/*"
   },
   "dependencies": {
     "eventemitter2": "^0.4.14",
     "jmp": "^0.2.0",
+    "jupyter-transport-wrapper": "file:../jupyter-transport-wrapper",
     "uuid": "^2.0.1"
   },
   "devDependencies": {
