@@ -4,19 +4,21 @@ _ = require 'lodash'
 child_process = require 'child_process'
 uuid = require 'uuid'
 jmp = require 'jmp'
+EventEmitter = require('eventemitter2').EventEmitter2
 
 JupyterTransport = require 'jupyter-transport-wrapper'
 
 module.exports =
-class Kernel
+class Kernel extends EventEmitter
     constructor: (config, kernelProcess) ->
+        super({wildcard: true})
         @language = config.language
         @executionCallbacks = {}
 
         config.address = "tcp://127.0.0.1"
         @transport = new JupyterTransport(config, kernelProcess)
-        @transport.on 'shell.*', @onShellMessage.bind(this)
-        @transport.on 'iopub.*', @onIOMessage.bind(this)
+        @transport.on 'shell.*', @_onMessage.bind(this, 'shell')
+        @transport.on 'iopub.*', @_onMessage.bind(this, 'iopub')
 
     interrupt: ->
         @kernelProcess.kill('SIGINT')
@@ -65,16 +67,12 @@ class Kernel
         @executionCallbacks[requestId] = onResults
         @transport.send 'shell', message
 
-    onShellMessage: (message) ->
-        if _.has(message, ['parent_header', 'msg_id'])
-            callback = @executionCallbacks[message.parent_header.msg_id]
-        if callback?
-            callback(message)
-
-    onIOMessage: (message) ->
-        if message.header.msg_type == 'status'
-            status = message.content.execution_state
-
+    # automatically rebroadcast the event
+    # call any callbacks for completion or results
+    _onMessage: (channel, message) ->
+        # @transport.event is automatically populated 
+        # with the true name of the event
+        @emit(@transport.event, message)
         if _.has(message, ['parent_header', 'msg_id'])
             callback = @executionCallbacks[message.parent_header.msg_id]
         if callback?
