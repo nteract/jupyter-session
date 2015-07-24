@@ -7,7 +7,7 @@ jmp = require 'jmp'
 
 # JupyterTransport = require 'jupyter-transport-wrapper'
 
-ConfigManager = require './config-manager'
+# ConfigManager = require './config-manager'
 
 module.exports =
 class Kernel
@@ -102,7 +102,7 @@ class Kernel
     addWatchCallback: (watchCallback) ->
         @watchCallbacks.push(watchCallback)
 
-    onShellMessage: (message) ->=
+    onShellMessage: (message) ->
         if _.has(message, ['parent_header', 'msg_id'])
             callback = @executionCallbacks[message.parent_header.msg_id]
         if callback?
