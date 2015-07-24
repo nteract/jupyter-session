@@ -1,5 +1,7 @@
 # jupyter-session
 
+Broken out of [Hydrogen](https://github.com/willwhitney/hydrogen).
+
 This API is not finalized.
 
 ## Usage
@@ -39,3 +41,5 @@ pythonSession.complete(code, function(results) {
     // results will be a jmp.Message
 });
 ```
+
+Session is an EventEmitter, so you can use any of these methods: https://github.com/asyncly/EventEmitter2
