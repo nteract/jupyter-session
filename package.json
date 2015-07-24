@@ -1,0 +1,27 @@
+{
+  "name": "jupyter-session",
+  "main": "./src/main",
+  "version": "0.0.1",
+  "description": "A tool for interacting with Jupyter Kernels",
+  "author": "Will Whitney <me@willwhitney.com>",
+  "license": "MIT",
+  "scripts": {
+    "prebuild": "mkdirp lib && mkdirp dist && npm run clean",
+    "build": "npm run build:es5 && npm run build:browser",
+    "build:es5": "coffee -c --map --output lib/ src",
+    "build:browser": "browserify lib/*.js --outfile dist/transformime.js",
+    "prepublish": "npm run build",
+    "clean": "rimraf lib/* dist/*"
+  },
+  "dependencies": {
+    "eventemitter2": "^0.4.14",
+    "jmp": "^0.2.0",
+    "uuid": "^2.0.1"
+  },
+  "devDependencies": {
+    "browserify": "^10.2.6",
+    "coffee-script": "^1.9.3",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.4.1"
+  }
+}

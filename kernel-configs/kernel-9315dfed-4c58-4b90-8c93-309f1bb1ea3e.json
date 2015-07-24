@@ -1,0 +1,11 @@
+{
+  "stdin_port": 60871, 
+  "ip": "127.0.0.1", 
+  "control_port": 60869, 
+  "hb_port": 60868, 
+  "signature_scheme": "hmac-sha256", 
+  "key": "3IHTQwAK21LYh5ue+w9uiCc1F9oV7xDpEBeTjnf8E0Z4KMFmhqqoV6Jki4qkIuSENzA+zbQYW5OGcWCjssTWLp/AZfKyUkL9TvOmGqfOoHpvsPBEhe21ZHQVjR6YwdjVZ4PV7MLvvfznHm3/6/iDoBr6GD3U5U6bOsad+wPEYEJ6yps9pc5BZMbZm1h7MEsthDHVUbOWKTJqWTnnnw+19MuVGInjHix02TqY8mUkrqzvPGmyzt93VN+PjkdMDjchdVyEOUu2GlvzVcs/MRGF5cUajgjarqlI6C3RmImQ+KMt5ZV4CbnX2a18nMbbzNBeaE0EYDhHwG37WW7j75WEZw==", 
+  "shell_port": 60870, 
+  "transport": "tcp", 
+  "iopub_port": 60872
+}
