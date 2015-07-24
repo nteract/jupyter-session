@@ -9,7 +9,7 @@ EventEmitter = require('eventemitter2').EventEmitter2
 JupyterTransport = require 'jupyter-transport-wrapper'
 
 module.exports =
-class Kernel extends EventEmitter
+class Session extends EventEmitter
     constructor: (config, kernelProcess) ->
         super({wildcard: true})
         @language = config.language
@@ -21,7 +21,7 @@ class Kernel extends EventEmitter
         @transport.on 'iopub.*', @_onMessage.bind(this, 'iopub')
 
     interrupt: ->
-        @kernelProcess.kill('SIGINT')
+        @transport.interrupt
 
     # onResults is a callback that may be called multiple times
     # as results come in from the kernel
@@ -70,7 +70,7 @@ class Kernel extends EventEmitter
     # automatically rebroadcast the event
     # call any callbacks for completion or results
     _onMessage: (channel, message) ->
-        # @transport.event is automatically populated 
+        # @transport.event is automatically populated
         # with the true name of the event
         @emit(@transport.event, message)
         if _.has(message, ['parent_header', 'msg_id'])
