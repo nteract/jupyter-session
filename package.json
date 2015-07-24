@@ -9,10 +9,15 @@
     "prebuild": "mkdirp lib && mkdirp dist && npm run clean",
     "build": "npm run build:es5 && npm run build:browser",
     "build:es5": "coffee -c --map --output lib/ src",
-    "build:browser": "echo 'browserify lib/kernel.js --outfile dist/jupyter-session.js'",
+    "build:browser": "browserify lib/main.js --outfile dist/jupyter-session.js",
     "prepublish": "npm run build",
     "clean": "rimraf lib/* dist/*"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nteract/jupyter-session.git"
+  },
+  "homepage": "https://github.com/nteract/jupyter-session",
   "dependencies": {
     "eventemitter2": "^0.4.14",
     "jmp": "^0.2.0",
