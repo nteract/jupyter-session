@@ -1,7 +1,4 @@
-fs = require 'fs'
-path = require 'path'
 _ = require 'lodash'
-child_process = require 'child_process'
 uuid = require 'uuid'
 jmp = require 'jmp'
 EventEmitter = require('eventemitter2').EventEmitter2
