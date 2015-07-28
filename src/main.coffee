@@ -18,7 +18,7 @@ class Session extends EventEmitter
         @transport.on 'iopub.*', @_onMessage.bind(this, 'iopub')
 
     interrupt: ->
-        @transport.interrupt
+        @transport.interrupt()
 
     # onResults is a callback that may be called multiple times
     # as results come in from the kernel
