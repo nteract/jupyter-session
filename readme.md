@@ -1,5 +1,7 @@
 # jupyter-session
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/nteract/jupyter-session.svg)](https://greenkeeper.io/)
+
 Broken out of [Hydrogen](https://github.com/willwhitney/hydrogen).
 
 This API is not finalized.
